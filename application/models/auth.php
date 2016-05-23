@@ -75,7 +75,7 @@ class Auth extends CI_Model{
 
             $session = array(
                 'role' => $result['role'],
-                'user_id' => $result['user_id']
+                'account_id' => $result['account_id']
             );
 
             $this->session->set_userdata($session);
@@ -86,7 +86,7 @@ class Auth extends CI_Model{
         if(isset($_SESSION['username'])) {
             echo 'U bent ingelogt als ' . $_SESSION['username'].'<br>';
             echo 'Dit is uw rol: '. $_SESSION['role'].'<br>';
-            echo 'Dit is uw unieke ID: '. $_SESSION['user_id'].'<br>';
+            echo 'Dit is uw unieke ID: '. $_SESSION['account_id'].'<br>';
         }
     }
 }

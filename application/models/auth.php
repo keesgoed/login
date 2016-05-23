@@ -27,6 +27,7 @@ class Auth extends CI_Model{
             $email = $_POST['email'];
             $password1 = $_POST['password1'];
             $password2 = $_POST['password2'];
+            $role = 'user';
 
             //Error messages
             //Get username and email (seperate) and check if they are taken in db
@@ -56,17 +57,26 @@ class Auth extends CI_Model{
                 $data = array(
                     'username' => $username,
                     'email' => $email,
-                    'password' => $password1
+                    'password' => $password1,
+                    'role' => $role
                 );
 
                 $this->db->insert('accounts', $data);
-                header("location: ".base_url()."login/login");
+                redirect(base_url('login'));
             }
         }
     }
     function getUser(){
+        if(isset($_SESSION['username'])) {
+            echo 'U bent ingelogt als ' . $_SESSION['username'];
+        }
+    }
+    function getRole(){
         if(isset($_SESSION['username'])){
-            echo 'U bent ingelogt als '.$_SESSION['username'].'.';
+            $username = $_SESSION['username'];
+            $query = $this->db->get_where('accounts', array('username' => $username));
+            $result = $query->row_array();
+            echo $result['role'];
         }
     }
 }

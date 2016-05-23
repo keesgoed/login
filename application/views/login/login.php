@@ -3,9 +3,10 @@
     <div class="col-lg-4">
         <form class="loginform" method="post">
             <?php
+            echo base_url('home');
             if(isset($_POST['submit'])){
                 if($this->Auth->get_credentials() == 1){
-                    header('location:'.base_url());
+                    redirect(base_url('home'));
                 }else{
                     echo '<div class="alert alert-danger" style="margin-top:-75px;">
                             <strong>Wrong username or password</strong>

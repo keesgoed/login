@@ -8,7 +8,6 @@ class Login extends CI_Controller{
         $this->load->model('Auth');
     }
     public function login(){
-
         if(!isset($_SESSION['username'])){
         $this->load->view('login/login');
 
@@ -16,27 +15,29 @@ class Login extends CI_Controller{
                 if ($this->Auth->get_credentials() == 1) {
                     $session = array(
                         'username' => $_POST['username'],
-                        'logged_in' => TRUE
+                        'logged_in' => TRUE,
+                        'role' => $this->Auth->getRole()
                     );
                     $this->session->set_userdata($session);
+                    redirect(base_url('home'));
                 }
             }
         }else{
-            header('location: '.base_url().'');
+            redirect(base_url('home'));
         }
         if(isset($_POST['register'])){
-            header('location: register');
+            redirect(base_url('register'));
         }
     }
     public function logout(){
         session_destroy();
-        header('location: '.base_url().'');
+        redirect(base_url('home'));
     }
 
     public function register(){
         $this->load->view('login/register');
         if(isset($_POST['login'])){
-            header('location: '.base_url('login/login'));
+            redirect(base_url('login'));
         }
     }
 }

@@ -5,9 +5,8 @@ if(isset($_SESSION['logged_in'])){
 }else{
  echo '<button><a href="login">Login</a></button>';
 }
+
 echo '<br>';
 $this->Auth->getUser();
-$this->Auth->getRole();
-
-
+echo '<br>';
  ?>

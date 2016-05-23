@@ -10,15 +10,16 @@ class Login extends CI_Controller{
     public function login(){
         if(!isset($_SESSION['username'])){
         $this->load->view('login/login');
-
+        echo $this->Auth->getRole();
             if(isset($_POST['submit'])) {
                 if ($this->Auth->get_credentials() == 1) {
+
                     $session = array(
                         'username' => $_POST['username'],
-                        'logged_in' => TRUE,
-                        'role' => $this->Auth->getRole()
+                        'logged_in' => TRUE
                     );
                     $this->session->set_userdata($session);
+                    $this->Auth->getRole();
                     redirect(base_url('home'));
                 }
             }

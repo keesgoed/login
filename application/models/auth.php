@@ -66,17 +66,27 @@ class Auth extends CI_Model{
             }
         }
     }
-    function getUser(){
-        if(isset($_SESSION['username'])) {
-            echo 'U bent ingelogt als ' . $_SESSION['username'];
-        }
-    }
+
     function getRole(){
         if(isset($_SESSION['username'])){
             $username = $_SESSION['username'];
             $query = $this->db->get_where('accounts', array('username' => $username));
             $result = $query->row_array();
-            echo $result['role'];
+
+            $session = array(
+                'role' => $result['role'],
+                'user_id' => $result['user_id']
+            );
+
+            $this->session->set_userdata($session);
+        }
+    }
+
+    function getUser(){
+        if(isset($_SESSION['username'])) {
+            echo 'U bent ingelogt als ' . $_SESSION['username'].'<br>';
+            echo 'Dit is uw rol: '. $_SESSION['role'].'<br>';
+            echo 'Dit is uw unieke ID: '. $_SESSION['user_id'].'<br>';
         }
     }
 }

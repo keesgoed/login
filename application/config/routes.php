@@ -56,3 +56,4 @@ $route['login'] = 'login/login';
 $route['register'] = 'login/register';
 $route['home'] = 'pages/index';
 $route['logout'] = 'login/logout';
+$route['PDF'] = 'pdfexample';
